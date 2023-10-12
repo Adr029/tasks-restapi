@@ -1,12 +1,14 @@
-package com.example.userdatabaseapi.model;
+package com.example.taskslist.model;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.Objects;
-
+@Table("tasks")
 public class Task {
-
+    @Id
     private int id;
     private String taskName;
-    private String date;
     private String notes;
     private String status;
 
@@ -24,14 +26,6 @@ public class Task {
 
     public void setTaskName(String taskName) {
         this.taskName = taskName;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public String getNotes() {
@@ -55,11 +49,11 @@ public class Task {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return id == task.id && Objects.equals(taskName, task.taskName) && Objects.equals(date, task.date) && Objects.equals(notes, task.notes) && Objects.equals(status, task.status);
+        return id == task.id && Objects.equals(taskName, task.taskName) && Objects.equals(notes, task.notes) && Objects.equals(status, task.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, taskName, date, notes, status);
+        return Objects.hash(id, taskName, notes, status);
     }
 }

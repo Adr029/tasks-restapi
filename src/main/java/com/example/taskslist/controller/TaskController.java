@@ -1,9 +1,8 @@
-package com.example.userdatabaseapi.controller;
+package com.example.taskslist.controller;
 
-import com.example.userdatabaseapi.dto.RequestDetails;
-import com.example.userdatabaseapi.model.Task;
-import com.example.userdatabaseapi.service.ResponseMessageService;
-import com.example.userdatabaseapi.service.TasksService;
+import com.example.taskslist.model.Task;
+import com.example.taskslist.service.ResponseMessageService;
+import com.example.taskslist.service.TasksService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +33,7 @@ public class TaskController {
     @GetMapping("/tasks/{id}")
     public Task specifiedTask(@PathVariable int id)
     {
-      return tasksService.displayTaskbyId(id);
+      return tasksService.displayTaskById(id);
     }
 
     //create new task
@@ -42,7 +41,7 @@ public class TaskController {
     public ResponseEntity<?> createTask(@RequestBody Task newTask)
     {
        tasksService.addTask(newTask);
-       return responseMessageService.createMessage("Task Added Successfully");
+       return responseMessageService.createMessage("Task Added Successfully", HttpStatus.ACCEPTED);
     }
 
     //update task status if it exists
@@ -53,8 +52,8 @@ public class TaskController {
             @RequestParam String status
     )
     {
-       tasksService.updateTask(id, status);
-       return responseMessageService.createMessage("Task Updated Successfully");
+       tasksService.updateTask(status, id);
+       return responseMessageService.createMessage("Task Updated Successfully", HttpStatus.ACCEPTED);
     }
 
     //delete task if it exists
@@ -65,7 +64,7 @@ public class TaskController {
     )
     {
        tasksService.deleteTask(id);
-       return responseMessageService.createMessage("Task Deleted Successfully");
+       return responseMessageService.createMessage("Task Deleted Successfully", HttpStatus.ACCEPTED);
     }
 
     //display data in order

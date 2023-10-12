@@ -1,4 +1,4 @@
-package com.example.userdatabaseapi.dto;
+package com.example.taskslist.dto;
 
 public class RequestDetails {
     private String message;

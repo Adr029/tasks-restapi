@@ -1,9 +1,8 @@
-package com.example.userdatabaseapi.advice;
+package com.example.taskslist.advice;
 
-import com.example.userdatabaseapi.exceptions.IncompleteDetailsException;
-import com.example.userdatabaseapi.dto.RequestDetails;
-import com.example.userdatabaseapi.exceptions.InvalidTaskException;
-import com.example.userdatabaseapi.service.ResponseMessageService;
+import com.example.taskslist.exceptions.IncompleteDetailsException;
+import com.example.taskslist.exceptions.InvalidTaskException;
+import com.example.taskslist.service.ResponseMessageService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,13 +20,13 @@ public class ExceptionController {
     @ExceptionHandler(IncompleteDetailsException.class)
     public ResponseEntity<?> exceptionIncompleteDetailsHandler()
     {
-        return responseMessageService.createMessage("Task details incomplete. Please check your input.");
+        return responseMessageService.createMessage("Task details incomplete. Please check your input.", HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(InvalidTaskException.class)
     public ResponseEntity<?> exceptionInvalidTaskHandler()
     {
-        return responseMessageService.createMessage("Invalid input, task does not exist");
+        return responseMessageService.createMessage("Invalid input, task does not exist", HttpStatus.BAD_REQUEST);
     }
 
 
